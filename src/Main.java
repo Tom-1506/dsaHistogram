@@ -1,8 +1,9 @@
 import java.util.Random;
 
-public class Main {
-
-    public static String[] generateHisto(int[] arrayIn) {
+public class Main
+{
+    public static String[] generateHisto(int[] arrayIn)
+    {
         String[] histoArray = new String[10];
 
         histoArray[0] = "1 - 10    :  ";
@@ -18,34 +19,36 @@ public class Main {
 
         int newElement;
 
-        for (int i = 0; i < arrayIn.length; i++) {
-
+        for (int i = 0; i < arrayIn.length; i++)
+        {
             newElement = arrayIn[i] / 10;
             histoArray[newElement] = histoArray[newElement]+"*";
         }
         return histoArray;
     }
 
-    public static int[] randomArray(int leng){
+    public static int[] randomArray(int leng)
+    {
         int[] arrayOut = new int[leng];
         Random randNum = new Random();
 
-        for(int i = 0; i < arrayOut.length; i++){
+        for(int i = 0; i < arrayOut.length; i++)
+        {
             arrayOut[i] = randNum.nextInt(100);
         }
         return arrayOut;
     }
 
-    public static void printHisto(String[] histoArray){
-
-        for (int i = 0; i < histoArray.length; i++) {
-
+    public static void printHisto(String[] histoArray)
+    {
+        for (int i = 0; i < histoArray.length; i++)
+        {
             System.out.println(histoArray[i]);
         }
     }
 
-    public static void main(String[] args){
-
+    public static void main(String[] args)
+    {
         printHisto(generateHisto(randomArray(100)));
     }
 }
