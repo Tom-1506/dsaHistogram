@@ -1,9 +1,7 @@
 import java.util.Random;
 
-public class Main
-{
-    public static String[] generateHisto(int[] arrayIn)
-    {
+public class Main{
+    public static void generateHisto(int[] arrayIn){
         String[] histoArray = new String[10];
 
         histoArray[0] = "1 - 10    :  ";
@@ -19,36 +17,45 @@ public class Main
 
         int newElement;
 
-        for (int i = 0; i < arrayIn.length; i++)
-        {
+        for (int i = 0; i < arrayIn.length; i++){
             newElement = arrayIn[i] / 10;
             histoArray[newElement] = histoArray[newElement]+"*";
         }
-        return histoArray;
     }
 
-    public static int[] randomArray(int leng)
-    {
+    public static int[] randomArray(int leng){
         int[] arrayOut = new int[leng];
         Random randNum = new Random();
 
-        for(int i = 0; i < arrayOut.length; i++)
-        {
-            arrayOut[i] = randNum.nextInt(100);
+        for(int i = 0; i < arrayOut.length; i++){
+            arrayOut[i] = randNum.nextInt(99) + 1;
         }
         return arrayOut;
     }
 
-    public static void printHisto(String[] histoArray)
-    {
-        for (int i = 0; i < histoArray.length; i++)
-        {
-            System.out.println(histoArray[i]);
+    public static void printArray(int[] arrayIn){
+        for(int i = 0; i < arrayIn.length; i++){
+            System.out.println(arrayIn[i]);
         }
     }
 
-    public static void main(String[] args)
-    {
-        printHisto(generateHisto(randomArray(100)));
+    public static void timeHisto(int start, int iterSize, int numTests, int numIterations){
+        for(int i = 0; i < numTests; i++) {
+            long average = 0;
+            for(int j = 0; j < numIterations; j++){
+                int[] testArray = randomArray(start + (iterSize * i));
+
+                long startTime = System.nanoTime();
+                generateHisto(testArray);
+                long endTime = System.nanoTime();
+
+                average += (endTime - startTime)/numIterations;
+            }
+            System.out.println(average);
+        }
+    }
+
+    public static void main(String[] args){
+        timeHisto(5000, 5000, 10, 100);
     }
 }
